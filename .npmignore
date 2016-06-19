@@ -1,0 +1,6 @@
+.gitignore
+node_modules
+.babelrc
+src
+browser
+test.html
