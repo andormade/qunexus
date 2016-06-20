@@ -77,8 +77,8 @@ export default class QuNexus extends Midium {
 	/**
 	 * Lights up the specified keys on the QuNexus controller
 	 *
-	 * @param {string|number|array} note
-	 * @param {number} brightness
+	 * @param {string|number|array} note    MIDI note 0-127
+	 * @param {number} [brightness]         Brightness 0-16
 	 *
 	 * @returns {object}
 	 */
@@ -86,10 +86,10 @@ export default class QuNexus extends Midium {
 		if (typeof note === 'string') {
 			note = note.toLowerCase();
 			if (KEYS.hasOwnProperty(note)) {
-				this.noteOn(KEYS[note], brightness, LED_CHANNEL);
+				this.lightUp(KEYS[note], brightness);
 			}
 		}
-		else if (typeof note === 'number') {
+		else if (typeof note === 'number' || Array.isArray(note)) {
 			this.noteOn(note, brightness, LED_CHANNEL);
 		}
 
@@ -99,8 +99,7 @@ export default class QuNexus extends Midium {
 	/**
 	 * Lights down the specified keys on the QuNexus controller
 	 *
-	 * @param {string|number|array} note
-	 * @param {number} brightness
+	 * @param {string|number|array} note    MIDI note 0-127
 	 *
 	 * @returns {object}
 	 */
@@ -108,13 +107,38 @@ export default class QuNexus extends Midium {
 		if (typeof note === 'string') {
 			note = note.toLowerCase();
 			if (KEYS.hasOwnProperty(note)) {
-				this.noteOff(KEYS[note], 0, LED_CHANNEL);
+				this.lightDown(KEYS[note], brightness);
 			}
 		}
-		else if (typeof note === 'number') {
-			this.noteOff(note, 0, LED_CHANNEL);
+		else if (typeof note === 'number' || Array.isArray(note)) {
+			this.noteOff(note, brightness, LED_CHANNEL);
 		}
 
+		return this;
+	}
+
+	/**
+	 * Lights up all the lights.
+	 *
+	 * @param {number} [brightness]    Brightness 0-16
+	 *
+	 * @returns {object}
+	 */
+	allLightsUp(brightness = DEFAULT_BRIGHTNESS) {
+		for (let note = 0; note < 25; note++) {
+			this.lightUp(note, brightness);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Turns down all the lights
+	 *
+	 * @returns {object}
+	 */
+	allLightsDown() {
+		this.allNotesOff();
 		return this;
 	}
 }

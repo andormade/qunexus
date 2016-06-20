@@ -1,6 +1,6 @@
 {
   "name": "qunexus.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JavaScript library for the Keith McMillen QuNexus MIDI controller",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/hngrhorace/qunexus.js#readme",
   "dependencies": {
-    "midium": "0.0.10"
+    "midium": "0.0.12"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
