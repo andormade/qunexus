@@ -1,5 +1,5 @@
 import Midium from 'midium';
-import {BLACK_KEYS, WHITE_KEYS, KEYS, LED_CHANNEL,
+import {KEY_0, BLACK_KEYS, WHITE_KEYS, KEYS, LED_CHANNEL,
 	DEFAULT_BRIGHTNESS} from './constants';
 
 /**
@@ -63,7 +63,8 @@ export default class QuNexus extends Midium {
 			});
 		}
 		else if (typeof note === 'number') {
-			for (note = note % 12; note < 128; note += 12) {
+			note = note + KEY_0;
+			for (note = note % 25; note < 128; note += 25) {
 				this.noteOff(note, 0, LED_CHANNEL);
 			}
 		}
