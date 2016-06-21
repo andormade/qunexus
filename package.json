@@ -1,5 +1,5 @@
 {
-  "name": "qunexus.js",
+  "name": "qunexus",
   "version": "0.0.2",
   "description": "JavaScript library for the Keith McMillen QuNexus MIDI controller",
   "main": "dist/index.js",
